@@ -1,0 +1,73 @@
+import random
+
+
+# 1
+
+class Car:
+    def __init__(self, regNum, maxSpeed):
+        self.regNum = regNum
+        self.maxSpeed = maxSpeed
+        self.currentSpeed = 0
+        self.travDis = 0
+
+
+tesla = Car("ABC-123", 142)
+print(f"Registration number of {tesla.regNum}, its max speed is {tesla.maxSpeed} km/h"
+      f"Current speed is {tesla.currentSpeed} km/h, travelled distance is {tesla.travDis}")
+
+
+# 2
+
+class Car:
+    def __init__(self, regNum, maxSpeed):
+        self.regNum = regNum
+        self.maxSpeed = maxSpeed
+        self.currentSpeed = 0
+        self.travDis = 0
+
+
+    def accelerate(self, acceleration):
+        self.currentSpeed = min(max(self.currentSpeed + acceleration, 0), self.maxSpeed)
+
+    def drive(self, hours):
+        self.travDis += self.currentSpeed * hours
+
+
+tesla = Car("ABC-123", 142)
+print(f"Registration number of {tesla.regNum}, its max speed is {tesla.maxSpeed} km/h"
+      f"Current speed is {tesla.currentSpeed} km/h, travelled distance is {tesla.travDis}")
+
+
+tesla.accelerate(30)
+print(f"Current speed is {tesla.currentSpeed} km/h")
+tesla.accelerate(70)
+print(f"Current speed is {tesla.currentSpeed} km/h")
+tesla.accelerate(50)
+print(f"Current speed is {tesla.currentSpeed} km/h")
+tesla.accelerate(-200)
+print(f"Final speed is {tesla.currentSpeed} km/h")
+
+
+# 3
+
+tesla.accelerate(60)
+tesla.travDis = 2000
+tesla.drive(1.5)
+
+print(f'The travelled distance has increased to {tesla.travDis} km')
+
+# 4
+car_list = []
+for i in range(10):
+    car_list.append(Car("ABC-"+str(i+1), random.randint(100, 200)))
+
+travMax = 0
+while travMax < 10000:
+    for car in car_list:
+        car.accelerate(random.randint(-10, 15))
+        car.drive(1)
+        travMax = max(car.travDis, travMax)
+
+for car in car_list:
+    print(f"{car.regNum:6s}:{car.maxSpeed},{car.travDis}")
+
